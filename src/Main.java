@@ -5,34 +5,13 @@ import java.util.Arrays;
 public class Main {
     static boolean programContinue = false;
     public static String[] array = new String[10];
-    //public static String[] arrayDiAppoggio = new String[0];
-
 
     public static void main(String[] args) {
 
-       /* do {
-            String[] fraseInInput = splitFraseInParole();
-            if (fraseInInput.length <= array.length) {
-                array = fraseInInput;
-            } else {
-                //Creo un nuovo array, di dimensione maggiore
-                String[] newDato = new String[fraseInInput.length];
-                //Copio tutti gli elementi nel nuovo array
-                System.arraycopy(fraseInInput, 0, newDato, 0, fraseInInput.length);
-                // Memorizzo nella variabile array il riferimento al nuovo array
-                array = newDato;
-            }
-            String[] arrayDimezzo = addString(array, arrayDiAppoggio);
-            arrayDiAppoggio = arrayDimezzo;
-            System.out.println(Arrays.toString(arrayDiAppoggio));
-            System.out.println("le parole immagazzinate sono:" + arrayDiAppoggio.length);
-            programContinue = true;
-        } while (programContinue);*/
-
         do{
-            String[] prova = splitFraseInParole();
-            riempiArray(prova);
-
+            String[] fraseInIngresso = splitFraseInParole();
+            riempiArray(fraseInIngresso);
+            System.out.println(Arrays.toString(array));
             programContinue= true;
         }while (programContinue);
 
@@ -45,31 +24,27 @@ public class Main {
         return arrayParole;
     }
 
-    public static String[] riempiArray(String[] arrayParole){
-        for(int i=0; i< array.length; i++){
-            if(array[i] != null || arrayParole.length > array.length) {
-              ingrandisciArray(array);
-                }else{
-                for (int j = 0; j < arrayParole.length; j++) {
-                    array[j] = arrayParole[j];
+    public static void riempiArray(String[] arrayParoleInput) {
+        for (int i = 0; i < arrayParoleInput.length; i++) {
+            for (int j = 0; j <= array.length; j++) {
+                if (j == array.length) {
+                    ingrandisciArray();
+                    //Inserisco la stringa nel nuovo array ingrandito
+                    array[j] = arrayParoleInput[i];
+                    break;
+                }
+                if (array[j]==null) {
+                    array[j]=arrayParoleInput[i];
+                    break;
                 }
             }
         }
-        System.out.println(Arrays.toString(array));
-        System.out.println(Arrays.toString(arrayParole));
-        return array;
     }
 
-    public static void ingrandisciArray(String[] arrayInIngresso){
-
+    public static void ingrandisciArray(){
+        String[] nuovoArray = new String[array.length + 10];
+        System.arraycopy(array, 0, nuovoArray, 0, array.length);
+        array = nuovoArray;
     }
 
-
-
-    /*public static String[] addString(String[] strings, String[] strings1) {
-        int currentLenght = strings.length;
-        String[] stringArrayNew = Arrays.copyOf(strings, currentLenght + strings1.length);
-        System.arraycopy(strings1, 0, stringArrayNew, strings.length, strings1.length);
-        return stringArrayNew;
-    }*/
 }
