@@ -9,7 +9,9 @@ public class Main {
     public static void main(String[] args) {
 
         do{
-            String[] fraseInIngresso = splitFraseInParole();
+            String input = JOptionPane.showInputDialog(null, "Inserisci la frase");
+            if(input == null) return;
+            String[] fraseInIngresso = splitFraseInParole(input);
             riempiArray(fraseInIngresso);
             System.out.println(Arrays.toString(array));
             programContinue= true;
@@ -18,8 +20,7 @@ public class Main {
 
     }
 
-    public static String[] splitFraseInParole() {
-        String input = JOptionPane.showInputDialog(null, "Inserisci la frase");
+    public static String[] splitFraseInParole(String input) {
         String[] arrayParole = input.split(" ");
         return arrayParole;
     }
